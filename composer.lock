@@ -1,0 +1,66 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "5d5df0cad1c3f0612a77f802acade7ff",
+    "content-hash": "7aa24ad8dbbe6fff670a823bfbc18bdd",
+    "packages": [
+        {
+            "name": "vector/core",
+            "version": "v2.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joseph-walker/vector.git",
+                "reference": "9357ee559e7338a4a6f678e270fa9f319f6a43fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joseph-walker/vector/zipball/9357ee559e7338a4a6f678e270fa9f319f6a43fd",
+                "reference": "9357ee559e7338a4a6f678e270fa9f319f6a43fd",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/php-code-coverage": "^3",
+                "phpunit/phpunit": "^5.0",
+                "satooshi/php-coveralls": "^1.0",
+                "symfony/yaml": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Vector\\": "src/",
+                    "Vector\\Test\\": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joseph Walker",
+                    "email": "joseph.walker@outlook.com"
+                }
+            ],
+            "description": "A functional programming library for PHP",
+            "keywords": [
+                "compose",
+                "curry",
+                "functional",
+                "monad",
+                "utility"
+            ],
+            "time": "2016-02-24 19:26:45"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

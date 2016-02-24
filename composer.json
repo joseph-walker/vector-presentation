@@ -1,0 +1,17 @@
+{
+    "name": "vector/table-builder",
+    "authors": [
+        {
+            "name": "Joseph Walker",
+            "email": "joseph.walker@outlook.com"
+        }
+    ],
+    "require": {
+        "vector/core": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vector\\": "./src"
+        }
+    }
+}
