@@ -46,19 +46,3 @@ $builder
 echo $builder->build($paginator->getCollection()->toArray());
 
 echo $paginator->appends($_GET)->render();
-?>
-
-<?php
-/**
- * Custom Paginator UI
- */
-if ($paginator->hasPages()) : ?>
-<div>
-    <?php if ($paginator->currentPage() > 1) : ?>
-    <a href="<?= $paginator->previousPageUrl() ?>">previous</a>
-    <?php endif; ?>
-    <?php if ($paginator->hasMorePages()) : ?>
-    <a href="<?= $paginator->nextPageUrl() ?>">next</a>
-    <?php endif; ?>
-</div>
-<?php endif; ?>
