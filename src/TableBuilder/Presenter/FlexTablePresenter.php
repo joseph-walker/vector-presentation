@@ -40,7 +40,9 @@ class FlexTablePresenter extends Module implements PresenterInterface
 
         $th = $node('div');
 
-        return $th($column['props'], [$text($column['name'])]);
+        return $th(array_merge([
+            'class' => 'vector_flex_table_head_cell',
+        ], $column['props']), [$text($column['name'])]);
     }
 
     protected static function makeHead($columns)
@@ -55,7 +57,7 @@ class FlexTablePresenter extends Module implements PresenterInterface
         return $thead([], [
             $tr([
                 'class' => 'vector_flex_table_head',
-                'style' => 'display: flex;justify-content: space-around;'
+                'style' => 'display: flex;'
             ], $map($makeHeadCell, $columns))
         ]);
     }
@@ -67,7 +69,9 @@ class FlexTablePresenter extends Module implements PresenterInterface
 
         $td = $node('div');
 
-        return $td($column['props'], [$text($column['accessor']($datum))]);
+        return $td(array_merge([
+            'class' => 'vector_flex_table_body_cell',
+        ], $column['props']), [$text($column['accessor']($datum))]);
     }
 
     protected static function makeBodyRow($columns, $datum)
@@ -79,8 +83,8 @@ class FlexTablePresenter extends Module implements PresenterInterface
         $tr = $node('div');
 
         return $tr([
-            'class' => 'vector_flex_table_row',
-            'style' => 'display: flex;justify-content: space-around;'
+            'class' => 'vector_flex_table_body_row',
+            'style' => 'display: flex;'
         ], $map($makeBodyCell($datum), $columns));
     }
 

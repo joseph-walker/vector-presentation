@@ -1,9 +1,9 @@
 <?php
 
+require 'bootstrap.php';
+
 use Vector\TableBuilder\Builder;
 use Vector\TableBuilder\Presenter;
-
-require __DIR__ . '/vendor/autoload.php';
 
 $builder = new Builder(new Presenter\FlexTablePresenter());
 
