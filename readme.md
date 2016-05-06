@@ -38,9 +38,14 @@ $builder
     ->column('Email', [], function($b) { return $b['email']; });
     
 echo $builder->build($paginator->getCollection()->toArray());
+
+// then render your paginator, if you choose
+
+echo $paginator->appends($_GET)->render();
+
 ```
 
-### Can I setup a paginator outside Laravel?
+### How do I setup a paginator outside Laravel?
 
 > Yep! just put this in your bootstrap process!
 
