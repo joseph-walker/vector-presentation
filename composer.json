@@ -1,11 +1,19 @@
 {
-    "name": "vector/table-builder",
+    "name": "vector/presentation",
     "authors": [
         {
             "name": "Joseph Walker",
             "email": "joseph.walker@outlook.com"
+        },
+        {
+            "name": "Logan Henson",
+            "email": "logan@loganhenson.com"
         }
     ],
+    "description": "A functional programming library that provides utilities for creating UI components and HTML primitives",
+    "type": "library",
+    "keywords": ["utility", "functional", "ui", "table", "html"],
+    "license": "MIT",
     "require": {
         "vector/core": "^2.0"
     },
