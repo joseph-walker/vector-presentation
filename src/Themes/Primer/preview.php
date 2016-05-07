@@ -1,38 +1,9 @@
-# Vector-Presentation
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/primer/3.0.1/primer.css">
 
-## Installation
-```
-composer require joseph-walker/vector-presentation
-```
+<?php
 
-## Basic Presenters
+require_once __DIR__ . '/../../../bootstrap.php';
 
-### Table
-> An html table (amaze right)
-
-### Csv
-> Yes, csv
-
-### Json
-> Yes, json
-
-## Themes
-> [Primer](http://primercss.io/)
-> - https://cdn.jsdelivr.net/primer/3.0.1/primer.css
-
-## FAQ
-
-### Can I use this with illuminate/pagination and illuminate/database?
-
-> Of course!
-
-- put this in your bootstrap
-```
-Setup::eloquentPagination();
-```
-
-- then go to town!
-```php
 use Vector\TableBuilder\Builder;
 use Vector\Themes\Primer\PrimerPagination;
 use Vector\Themes\Primer\PrimerTablePresenter;
@@ -49,4 +20,3 @@ $builder
 echo $builder->build($paginator->getCollection()->toArray());
 
 PrimerPagination::render($paginator->appends($_GET));
-```

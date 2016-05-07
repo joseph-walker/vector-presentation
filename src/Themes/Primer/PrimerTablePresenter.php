@@ -1,19 +1,20 @@
 <?php
 
-namespace Vector\TableBuilder\Presenter;
+namespace Vector\Themes\Primer;
 
-use Vector\Core\Module;
 use Vector\Control\Functor;
+use Vector\Core\Module;
 use Vector\Markup\Html;
+use Vector\TableBuilder\Presenter\PresenterInterface;
 
-class FlexTablePresenter extends Module implements PresenterInterface
+class PrimerTablePresenter extends Module implements PresenterInterface
 {
     private $tableProps;
 
     public function __construct($tableProps = [])
     {
         $this->tableProps = array_merge([
-            'class' => 'vector_flex_table',
+            'class' => 'vector_primer_table',
             'style' => 'display: flex;flex-direction: column;'
         ], $tableProps);
     }
@@ -41,22 +42,22 @@ class FlexTablePresenter extends Module implements PresenterInterface
         $th = $node('div');
 
         return $th(array_merge([
-            'class' => 'vector_flex_table_head_cell',
+            'class' => 'vector_primer_table_head_cell',
         ], $column['props']), [$text($column['name'])]);
     }
 
     protected static function makeHead($columns)
     {
-        $map          = Functor::using('fmap');
-        $node         = Html::using('node');
+        $map = Functor::using('fmap');
+        $node = Html::using('node');
         $makeHeadCell = self::using('makeHeadCell');
 
         $thead = $node('div');
-        $tr    = $node('div');
+        $tr = $node('div');
 
         return $thead([], [
             $tr([
-                'class' => 'vector_flex_table_head',
+                'class' => 'vector_primer_table_head',
                 'style' => 'display: flex;'
             ], $map($makeHeadCell, $columns))
         ]);
@@ -70,35 +71,36 @@ class FlexTablePresenter extends Module implements PresenterInterface
         $td = $node('div');
 
         return $td(array_merge([
-            'class' => 'vector_flex_table_body_cell',
+            'class' => 'vector_primer_table_body_cell',
         ], $column['props']), [$text($column['accessor']($datum))]);
     }
 
     protected static function makeBodyRow($columns, $datum)
     {
-        $map          = Functor::using('fmap');
-        $node         = Html::using('node');
+        $map = Functor::using('fmap');
+        $node = Html::using('node');
         $makeBodyCell = self::using('makeBodyCell');
 
         $tr = $node('div');
 
         return $tr([
-            'class' => 'vector_flex_table_body_row',
+            'class' => 'vector_primer_table_body_row',
             'style' => 'display: flex;'
         ], $map($makeBodyCell($datum), $columns));
     }
 
     protected static function makeBody($columns, $data)
     {
-        $map         = Functor::using('fmap');
-        $node        = Html::using('node');
+        $map = Functor::using('fmap');
+        $node = Html::using('node');
         $makeBodyRow = self::using('makeBodyRow');
 
         $tbody = $node('div');
 
         return $tbody([
-            'class' => 'vector_flex_table_body',
+            'class' => 'vector_primer_table_body',
             'style' => 'display: flex;flex-direction: column;'
         ], $map($makeBodyRow($columns), $data));
     }
 }
+

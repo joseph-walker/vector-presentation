@@ -5,7 +5,7 @@ require 'bootstrap.php';
 use Vector\TableBuilder\Builder;
 use Vector\TableBuilder\Presenter;
 
-$builder = new Builder(new Presenter\FlexTablePresenter());
+$builder = new Builder(new Presenter\TablePresenter());
 
 $builder
     ->column('Field A', [], function($a) { return $a['a']; })
@@ -42,3 +42,9 @@ print_r($builder->build($data)); echo PHP_EOL;
 $builder->setTablePresenter(new Presenter\JsonPresenter());
 print_r($builder->build($data)); echo PHP_EOL;
 // [{"Field A":"Hello","Field B":"World"},{"Field A":"Foo","Field B":"Bar"}]
+
+?>
+
+<h2>Themes</h2>
+
+<a href="/src/Themes/Primer/preview.php">Primer</a>
