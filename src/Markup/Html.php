@@ -46,6 +46,6 @@ class Html extends Module
 
     protected static function text($str)
     {
-        return htmlentities($str);
+        return $str;
     }
 }
