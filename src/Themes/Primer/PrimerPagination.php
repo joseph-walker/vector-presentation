@@ -8,6 +8,8 @@ class PrimerPagination
 {
     public static function render(LengthAwarePaginator $paginator)
     {
+        ob_start();
+
         if ($paginator->hasPages()) : ?>
             <div style="text-align: center;padding: 15px;">
                 <a href="<?= $paginator->previousPageUrl() ?>" class="btn btn-default <?= $paginator->currentPage() > 1 ? '' : 'disabled' ?>">
@@ -30,5 +32,7 @@ class PrimerPagination
                 </a>
             </div>
         <?php endif;
+
+        return ob_get_clean();
     }
 }

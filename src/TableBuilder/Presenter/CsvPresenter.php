@@ -28,7 +28,7 @@ class CsvPresenter implements PresenterInterface
             }
         }
 
-        $csvBuilder = $compose($join('\n'), $fmap($join(',')));
+        $csvBuilder = $compose($join(PHP_EOL), $fmap($join(',')));
 
         return $csvBuilder($buffer);
     }

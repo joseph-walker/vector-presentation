@@ -47,6 +47,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         $a = $node('a');
 
         return $button_row([], [$a([
+            'download' => 'table.csv',
             'href' => Util::withQuery(['download' => 'csv']),
             'style' => 'margin-bottom: 5px;',
             'class' => 'btn btn-default right'
