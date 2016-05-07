@@ -54,10 +54,8 @@ class PrimerPagination
             </style>
 
             <div style="text-align: center;padding: 15px;">
-                <a href="<?= $paginator->previousPageUrl() ?>">
-                    <button <?= $paginator->currentPage() > 1 ? '' : 'disabled' ?> class="btn btn-default">
-                        Previous
-                    </button>
+                <a href="<?= $paginator->previousPageUrl() ?>" class="btn btn-default <?= $paginator->currentPage() > 1 ? '' : 'disabled' ?>">
+                    Previous
                 </a>
                 <?php foreach (range(
                                    max($paginator->currentPage() - 4, 0) + 1,
@@ -71,10 +69,8 @@ class PrimerPagination
                         <?= $index ?>
                     </a>
                 <?php endforeach; ?>
-                <a href="<?= $paginator->nextPageUrl() ?>">
-                    <button <?= $paginator->nextPageUrl() ? '' : 'disabled' ?> class="btn btn-default">
-                        Next
-                    </button>
+                <a href="<?= $paginator->nextPageUrl() ?>" class="btn btn-default <?= $paginator->nextPageUrl() ? '' : 'disabled' ?>">
+                    Next
                 </a>
             </div>
         <?php endif;
