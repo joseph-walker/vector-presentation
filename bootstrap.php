@@ -20,7 +20,6 @@ call_user_func(function () {
         'collation' => 'utf8_unicode_ci',
         'prefix'    => '',
     ]);
-    $capsule->setEventDispatcher(new Dispatcher(new Container));
     $capsule->setAsGlobal();
     $capsule->bootEloquent();
 

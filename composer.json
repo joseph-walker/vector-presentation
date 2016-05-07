@@ -11,7 +11,6 @@
     },
     "require-dev": {
       "illuminate/database": "~5.2.0",
-      "illuminate/events": "~5.2.0",
       "illuminate/pagination": "~5.2.0"
     },
     "autoload": {
