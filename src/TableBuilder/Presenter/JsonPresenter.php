@@ -4,7 +4,7 @@ namespace Vector\TableBuilder\Presenter;
 
 class JsonPresenter implements PresenterInterface
 {
-    public function build($columnDefinitions, $data)
+    public function build($columnDefinitions, $data, $extra = null)
     {
         $buffer = [];
 

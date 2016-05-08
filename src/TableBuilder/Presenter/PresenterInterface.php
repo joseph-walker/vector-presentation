@@ -4,5 +4,5 @@ namespace Vector\TableBuilder\Presenter;
 
 interface PresenterInterface
 {
-    public function build($columnDefinitions, $data, ...$extra);
+    public function build($columnDefinitions, $data, $extra = null);
 }

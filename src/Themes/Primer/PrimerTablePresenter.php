@@ -21,16 +21,16 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         ], $tableProps);
     }
 
-    public function build($columnDefinitions, $data, ...$extra)
+    public function build($columnDefinitions, $data, $extra = null)
     {
         $node = Html::using('node');
 
         if (
-            isset($extra[0][0])
-            && get_class($extra[0][0]) === LengthAwarePaginator::class
+            !is_null($extra)
+            && get_class($extra) === LengthAwarePaginator::class
         ) {
             /** @var LengthAwarePaginator $paginator */
-            $paginator = $extra[0][0];
+            $paginator = $extra;
             $makeResultCount = function () use ($paginator) {
                 return 'Showing result '
                 . ($paginator->firstItem() === $paginator->lastItem()

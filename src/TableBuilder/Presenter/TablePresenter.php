@@ -15,7 +15,7 @@ class TablePresenter extends Module implements PresenterInterface
         $this->tableProps = $tableProps;
     }
 
-    public function build($columnDefinitions, $data)
+    public function build($columnDefinitions, $data, $extra = null)
     {
         $node = Html::using('node');
 
