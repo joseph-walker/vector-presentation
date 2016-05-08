@@ -2,6 +2,7 @@
 
 namespace Vector\Themes\Primer;
 
+use Illuminate\Pagination\LengthAwarePaginator;
 use Vector\Control\Functor;
 use Vector\Core\Module;
 use Vector\Markup\Html;
@@ -20,9 +21,31 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         ], $tableProps);
     }
 
-    public function build($columnDefinitions, $data)
+    public function build($columnDefinitions, $data, ...$extra)
     {
         $node = Html::using('node');
+
+        if (
+            isset($extra[0][0])
+            && get_class($extra[0][0]) === LengthAwarePaginator::class
+        ) {
+            /** @var LengthAwarePaginator $paginator */
+            $paginator = $extra[0][0];
+            $makeResultCount = function () use ($paginator) {
+                return 'Showing result '
+                . ($paginator->firstItem() === $paginator->lastItem()
+                    ? $paginator->firstItem()
+                    : ($paginator->firstItem()
+                        .  ' - '
+                        . $paginator->lastItem()))
+                . ' of '
+                . $paginator->total();
+            };
+        } else {
+            $makeResultCount = function () {
+                return '<div></div>';
+            };
+        }
 
         $table = $node('div');
 
@@ -30,9 +53,12 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         $makeBody = self::using('makeBody');
         $makeStyle = self::using('makeStyle');
         $makeDownloadButton = self::using('makeDownloadButton');
+        $makeButtonBar = self::using('makeButtonBar');
 
-        return $makeStyle() . $table($this->tableProps, [
-            $makeDownloadButton(),
+        return $makeStyle() . $makeButtonBar([
+            $makeResultCount(),
+            $makeDownloadButton()
+        ]) . $table($this->tableProps, [
             $makeHead($columnDefinitions),
             $makeBody($columnDefinitions, $data)
         ]);
@@ -43,15 +69,25 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         $text = Html::using('text');
         $node = Html::using('node');
 
-        $button_row = $node('div');
         $a = $node('a');
 
-        return $button_row([], [$a([
+        return $a([
             'download' => 'table.csv',
             'href' => Util::withQuery(['download' => 'csv']),
-            'style' => 'margin-bottom: 5px;',
             'class' => 'btn btn-default right'
-        ], [$text('Download CSV')])]);
+        ], [$text('Download CSV')]);
+    }
+
+    protected static function makebuttonBar(array $buttons)
+    {
+        $node = Html::using('node');
+
+        $div = $node('div');
+
+        return $div([
+            'class' => 'vector_primer_table_button_bar',
+            'style' => 'margin-bottom: 5px;',
+        ], $buttons);
     }
 
     protected static function makeHeadCell($column)
@@ -117,8 +153,12 @@ class PrimerTablePresenter extends Module implements PresenterInterface
             body {
                 padding: 15px;
             }
-            .vector_primer_download_button {
-
+            .vector_primer_table_button {
+            }
+            .vector_primer_table_button_bar {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
             }
             .vector_primer_table {
                 margin-bottom: 10px;
@@ -148,11 +188,13 @@ class PrimerTablePresenter extends Module implements PresenterInterface
                 padding: 5px;
                 flex: 1;
                 width: 0;
+                word-wrap: break-word;
             }
             .vector_primer_table_body_cell {
                 padding: 5px;
                 flex: 1;
                 width: 0;
+                word-wrap: break-word;
             }
             .vector_primer_table_body_row {
                 padding: 5px;

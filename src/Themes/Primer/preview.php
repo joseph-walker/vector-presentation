@@ -31,8 +31,15 @@ $builder
 
 ?>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/primer/3.0.1/primer.css">
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/primer/3.0.1/primer.css">
+    </head>
+    <body>
+    <?= $builder->build($paginator->getCollection()->toArray(), $paginator) ?>
 
-<?= $builder->build($paginator->getCollection()->toArray()) ?>
+    <?= PrimerPagination::render($paginator->appends($_GET)) ?>
+    </body>
+</html>
 
-<?= PrimerPagination::render($paginator->appends($_GET)) ?>
+

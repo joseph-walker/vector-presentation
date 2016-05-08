@@ -35,8 +35,8 @@ class Builder
         return $this;
     }
 
-    public function build($data)
+    public function build($data, ...$extra)
     {
-        return $this->tablePresenter->build($this->columnData, $data);
+        return $this->tablePresenter->build($this->columnData, $data, $extra);
     }
 }
