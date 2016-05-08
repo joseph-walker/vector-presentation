@@ -147,17 +147,20 @@ class PrimerTablePresenter extends Module implements PresenterInterface
             .vector_primer_table_head_cell {
                 padding: 5px;
                 flex: 1;
+                width: 0;
             }
             .vector_primer_table_body_cell {
                 padding: 5px;
                 flex: 1;
-            }
-            .vector_primer_table_body_row:nth-child(even) {
-                background: #F5F5F5;
+                width: 0;
             }
             .vector_primer_table_body_row {
                 padding: 5px;
                 align-items: center;
+                background: white;
+            }
+            .vector_primer_table_body_row:nth-child(even) {
+                background: #F5F5F5;
             }
         </style>
 
