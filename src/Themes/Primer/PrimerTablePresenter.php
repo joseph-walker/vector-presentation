@@ -85,7 +85,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
             'class' => 'form-select',
             'onchange' => "window.location = window.location.search.indexOf('perPage') !== -1"
                 . "? window.location.href.replace(/(perPage=)[^\&]+/, '$1' + this.value)"
-                . ": window.location.href.match( /[\\?]/g ) ? '&' : '?' + 'perPage=' + this.value;"
+                . ": (window.location.search == '' ? (window.location.href + '?perPage=' + this.value) : (window.location.href + '&perPage=' + this.value));"
         ], [
             $perPageOption(10),
             $perPageOption(25),
