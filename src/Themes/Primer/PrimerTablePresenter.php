@@ -54,13 +54,43 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         $makeStyle = self::using('makeStyle');
         $makeDownloadButton = self::using('makeDownloadButton');
         $makeButtonBar = self::using('makeButtonBar');
+        $makePageLengthSelector = self::using('makePageLengthSelector');
 
         return $makeStyle() . $makeButtonBar([
+            $makePageLengthSelector(),
             $makeResultCount(),
             $makeDownloadButton()
         ]) . $table($this->tableProps, [
             $makeHead($columnDefinitions),
             $makeBody($columnDefinitions, $data)
+        ]);
+    }
+
+    protected static function makePageLengthSelector()
+    {
+        $node = Html::using('node');
+
+        $select = $node('select');
+        $option = $node('option');
+
+        $perPageOption = function ($value) use ($option) {
+            $value = htmlentities($value, ENT_QUOTES, 'UTF-8', false);
+
+            return isset($_GET['perPage']) && $_GET['perPage'] == $value
+                ? $option(['value' => $value, 'selected' => ''], ["$value per page"])
+                : $option(['value' => $value], ["$value per page"]);
+        };
+
+        return $select([
+            'class' => 'form-select',
+            'onchange' => "window.location = window.location.search.indexOf('perPage') !== -1"
+                . "? window.location.href.replace(/(perPage=)[^\&]+/, '$1' + this.value)"
+                . ": window.location.href.match( /[\\?]/g ) ? '&' : '?' + 'perPage=' + this.value;"
+        ], [
+            $perPageOption(10),
+            $perPageOption(25),
+            $perPageOption(50),
+            $perPageOption(100)
         ]);
     }
 
@@ -74,7 +104,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         return $a([
             'download' => 'table.csv',
             'href' => Util::withQuery(['download' => 'csv']),
-            'class' => 'btn btn-default right'
+            'class' => 'btn btn-default'
         ], [$text('Download CSV')]);
     }
 

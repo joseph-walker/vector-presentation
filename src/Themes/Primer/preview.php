@@ -19,7 +19,7 @@ if (isset($_GET['download'])) {
 }
 
 /** @var \Illuminate\Pagination\LengthAwarePaginator $paginator */
-$paginator = User::orderBy('id')->paginate(5);
+$paginator = User::orderBy('id')->paginate(isset($_GET['perPage']) ? $_GET['perPage'] : 10);
 
 $builder = new Builder(new PrimerTablePresenter());
 
