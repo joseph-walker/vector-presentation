@@ -180,9 +180,6 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         ob_start(); ?>
 
         <style>
-            body {
-                padding: 15px;
-            }
             .vector_primer_table_button {
             }
             .vector_primer_table_button_bar {
