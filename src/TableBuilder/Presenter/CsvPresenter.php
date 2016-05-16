@@ -20,11 +20,15 @@ class CsvPresenter implements PresenterInterface
         $buffer   = [];
         $buffer[] = $fmap($view($indexLens('name')), $columnDefinitions);
 
+        $surround_quotes = function ($string) {
+            return '"' . str_replace('"', "'", $string) . '"';
+        };
+
         foreach ($data as $datum) {
             $row = &$buffer[];
 
             foreach ($columnDefinitions as $definition) {
-                $row[] = $definition['accessor']($datum);
+                $row[] = $surround_quotes($definition['accessor']($datum));
             }
         }
 
