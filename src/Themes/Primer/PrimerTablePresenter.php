@@ -215,7 +215,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
                 padding: 5px;
                 flex: 1;
                 width: 0;
-                word-wrap: break-word;
+                word-break: break-all;
             }
             .vector_primer_table_body_cell {
                 padding: 5px;
