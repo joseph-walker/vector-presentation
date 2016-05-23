@@ -10,6 +10,8 @@ class TablePresenter extends Module implements PresenterInterface
 {
     private $tableProps;
 
+    protected $dirtyHackToEnableIDEAutocompletion = true;
+
     public function __construct($tableProps = [])
     {
         $this->tableProps = $tableProps;
@@ -17,72 +19,36 @@ class TablePresenter extends Module implements PresenterInterface
 
     public function build($columnDefinitions, $data, $extra = null)
     {
-        $node = Html::using('node');
-
-        $table = $node('table');
-
-        $makeHead = self::using('makeHead');
-        $makeBody = self::using('makeBody');
-
-        return $table($this->tableProps, [
-            $makeHead($columnDefinitions),
-            $makeBody($columnDefinitions, $data)
+        return Html::node('table', $this->tableProps, [
+            self::makeHead($columnDefinitions),
+            self::makeBody($columnDefinitions, $data)
         ]);
     }
 
-    protected static function makeHeadCell($column)
+    protected static function _makeHeadCell($column)
     {
-        $text = Html::using('text');
-        $node = Html::using('node');
-
-        $th = $node('th');
-
-        return $th($column['props'], [$text($column['name'])]);
+        return Html::node('th', $column['props'], [Html::text($column['name'])]);
     }
 
-    protected static function makeHead($columns)
+    protected static function _makeHead($columns)
     {
-        $map          = Functor::using('fmap');
-        $node         = Html::using('node');
-        $makeHeadCell = self::using('makeHeadCell');
-
-        $thead = $node('thead');
-        $tr    = $node('tr');
-
-        return $thead([], [
-            $tr([], $map($makeHeadCell, $columns))
+        return Html::node('thead', [], [
+            Html::node('tr', [], Functor::fmap(self::makeHeadCell(), $columns))
         ]);
     }
 
-    protected static function makeBodyCell($datum, $column)
+    protected static function _makeBodyCell($datum, $column)
     {
-        $text = Html::using('text');
-        $node = Html::using('node');
-
-        $td = $node('td');
-
-        return $td($column['props'], [$text($column['accessor']($datum))]);
+        return Html::node('td', $column['props'], [Html::text($column['accessor']($datum))]);
     }
 
-    protected static function makeBodyRow($columns, $datum)
+    protected static function _makeBodyRow($columns, $datum)
     {
-        $map          = Functor::using('fmap');
-        $node         = Html::using('node');
-        $makeBodyCell = self::using('makeBodyCell');
-
-        $tr = $node('tr');
-
-        return $tr([], $map($makeBodyCell($datum), $columns));
+        return Html::node('tr', [], Functor::fmap(self::makeBodyCell($datum), $columns));
     }
 
-    protected static function makeBody($columns, $data)
+    protected static function _makeBody($columns, $data)
     {
-        $map         = Functor::using('fmap');
-        $node        = Html::using('node');
-        $makeBodyRow = self::using('makeBodyRow');
-
-        $tbody = $node('tbody');
-
-        return $tbody([], $map($makeBodyRow($columns), $data));
+        return Html::node('tbody', [], Functor::fmap(self::makeBodyRow($columns), $data));
     }
 }
