@@ -10,7 +10,7 @@ class TablePresenter extends Module implements PresenterInterface
 {
     private $tableProps;
 
-    protected $dirtyHackToEnableIDEAutocompletion = true;
+    protected static $dirtyHackToEnableIDEAutocompletion = true;
 
     public function __construct($tableProps = [])
     {
