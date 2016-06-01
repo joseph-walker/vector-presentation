@@ -11,25 +11,18 @@ class Html extends Module
 {
     private static function attributes($attributes)
     {
-        $join = Strings::using('join');
-        $zip  = ArrayList::using('zipWith');
-        $keys = ArrayList::using('keys');
-        $vals = ArrayList::using('values');
-
         $attrVal = function($attr, $val) {
             return $attr . '="' . $val . '"';
         };
 
         return count($attributes)
-            ? ' ' . $join(' ', $zip($attrVal, $keys($attributes), $vals($attributes)))
+            ? ' ' . Strings::join(' ', ArrayList::zipWith($attrVal, ArrayList::keys($attributes), ArrayList::values($attributes)))
             : '';
     }
 
     private static function children($children)
     {
-        $join = Strings::using('join');
-
-        return $join('', $children);
+        return Strings::join('', $children);
     }
 
     protected static function node($node, $attributes, $children)
