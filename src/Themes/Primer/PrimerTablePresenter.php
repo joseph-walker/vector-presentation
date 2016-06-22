@@ -25,12 +25,15 @@ class PrimerTablePresenter extends Module implements PresenterInterface
     {
         $node = Html::using('node');
 
-        if (
-            !is_null($extra)
-            && get_class($extra) === LengthAwarePaginator::class
+        $empty = function () {
+            return '<div></div>';
+        };
+
+        if (isset($extra['paginator'])
+            && get_class($extra['paginator']) === LengthAwarePaginator::class
         ) {
             /** @var LengthAwarePaginator $paginator */
-            $paginator = $extra;
+            $paginator = $extra['paginator'];
             $makeResultCount = function () use ($paginator) {
                 return 'Showing result '
                 . ($paginator->firstItem() === $paginator->lastItem()
@@ -42,9 +45,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
                 . $paginator->total();
             };
         } else {
-            $makeResultCount = function () {
-                return '<div></div>';
-            };
+            $makeResultCount = $empty;
         }
 
         $table = $node('div');
@@ -52,9 +53,13 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         $makeHead = self::using('makeHead');
         $makeBody = self::using('makeBody');
         $makeStyle = self::using('makeStyle');
-        $makeDownloadButton = self::using('makeDownloadButton');
+        $makeDownloadButton = isset($extra['download']) && $extra['download']
+            ? self::using('makeDownloadButton')
+            : $empty;
         $makeButtonBar = self::using('makeButtonBar');
-        $makePageLengthSelector = self::using('makePageLengthSelector');
+        $makePageLengthSelector = isset($extra['perPage']) && $extra['perPage']
+            ? self::using('makePageLengthSelector')
+            : $empty;
 
         return $makeStyle() . $makeButtonBar([
             $makePageLengthSelector(),
