@@ -15,7 +15,7 @@
     "keywords": ["utility", "functional", "ui", "table", "html"],
     "license": "MIT",
     "require": {
-        "vector/core": "^2.0"
+        "vector/core": "^3.0"
     },
     "require-dev": {
       "illuminate/database": "~5.2.0",

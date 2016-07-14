@@ -25,7 +25,7 @@ class Html extends Module
         return Strings::join('', $children);
     }
 
-    protected static function node($node, $attributes, $children)
+    protected static function __node($node, $attributes, $children)
     {
         return '<'
             . $node
@@ -37,7 +37,7 @@ class Html extends Module
             . '>';
     }
 
-    protected static function text($str)
+    protected static function __text($str)
     {
         return $str;
     }

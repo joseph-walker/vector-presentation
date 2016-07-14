@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "38eb8216e2b2369c802742675a74c2b2",
-    "content-hash": "5257b10b6565c02091ded7a7bd28ba19",
+    "hash": "370941b997e4cb6283b64144ba4d0ac3",
+    "content-hash": "5fd94cd081e7ad4a69c3e00b08379868",
     "packages": [
         {
             "name": "vector/core",
-            "version": "v2.0.21",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joseph-walker/vector.git",
-                "reference": "79be3cb486eddf6a833e6da6ea51b60722d81c66"
+                "reference": "26abf80f72fe690c1451e2993e102e0d7c694624"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joseph-walker/vector/zipball/79be3cb486eddf6a833e6da6ea51b60722d81c66",
-                "reference": "79be3cb486eddf6a833e6da6ea51b60722d81c66",
+                "url": "https://api.github.com/repos/joseph-walker/vector/zipball/26abf80f72fe690c1451e2993e102e0d7c694624",
+                "reference": "26abf80f72fe690c1451e2993e102e0d7c694624",
                 "shasum": ""
             },
             "require-dev": {
@@ -52,7 +52,7 @@
                 "monad",
                 "utility"
             ],
-            "time": "2016-06-16 18:51:33"
+            "time": "2016-07-13 17:08:15"
         }
     ],
     "packages-dev": [
@@ -524,16 +524,16 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "b36e79d7bbbfa4a7e9708335082b3eba2263d356"
+                "reference": "d63a94528530c3ea5ff46924c8001cec4a398609"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/b36e79d7bbbfa4a7e9708335082b3eba2263d356",
-                "reference": "b36e79d7bbbfa4a7e9708335082b3eba2263d356",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/d63a94528530c3ea5ff46924c8001cec4a398609",
+                "reference": "d63a94528530c3ea5ff46924c8001cec4a398609",
                 "shasum": ""
             },
             "require": {
@@ -584,7 +584,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-14 11:18:07"
+            "time": "2016-06-29 05:41:56"
         }
     ],
     "aliases": [],

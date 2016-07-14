@@ -21,7 +21,7 @@ if (isset($_GET['download'])) {
 /** @var \Illuminate\Pagination\LengthAwarePaginator $paginator */
 $paginator = User::orderBy('id')->paginate(isset($_GET['perPage']) ? $_GET['perPage'] : 10);
 
-$builder = new Builder(new PrimerTablePresenter());
+$builder = new Builder(new CsvPresenter());
 
 $button = "<button class='btn btn-primary'>asdf asd f</button>";
 
@@ -36,7 +36,11 @@ $builder
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/primer/3.0.1/primer.css">
     </head>
     <body>
-    <?= $builder->build($paginator->getCollection()->toArray(), $paginator) ?>
+    <?= $builder->build($paginator->getCollection()->toArray(), [
+        'paginator' => $paginator,
+        'perPage' => true,
+        'download' => true
+    ]) ?>
 
     <?= PrimerPagination::render($paginator->appends($_GET)) ?>
     </body>

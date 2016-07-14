@@ -11,14 +11,14 @@ class CsvPresenter implements PresenterInterface
 {
     public function build($columnDefinitions, $data, $extra = null)
     {
-        $view      = Lens::using('view');
+//        $view      = Lens::using('view');
         $indexLens = Lens::using('indexLens');
         $compose   = Lambda::using('compose');
         $fmap      = Functor::using('fmap');
         $join      = Strings::using('join');
 
         $buffer   = [];
-        $buffer[] = $fmap($view($indexLens('name')), $columnDefinitions);
+        $buffer[] = $fmap(Lens::viewL($indexLens('name')), $columnDefinitions);
 
         $surround_quotes = function ($string) {
             return '"' . str_replace('"', "'", $string) . '"';

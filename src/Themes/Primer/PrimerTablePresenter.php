@@ -71,7 +71,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         ]);
     }
 
-    protected static function makePageLengthSelector()
+    protected static function __makePageLengthSelector()
     {
         $node = Html::using('node');
 
@@ -99,7 +99,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         ]);
     }
 
-    protected static function makeDownloadButton()
+    protected static function __makeDownloadButton()
     {
         $text = Html::using('text');
         $node = Html::using('node');
@@ -113,7 +113,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         ], [$text('Download CSV')]);
     }
 
-    protected static function makebuttonBar(array $buttons)
+    protected static function __makebuttonBar(array $buttons)
     {
         $node = Html::using('node');
 
@@ -125,7 +125,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         ], $buttons);
     }
 
-    protected static function makeHeadCell($column)
+    protected static function __makeHeadCell($column)
     {
         $text = Html::using('text');
         $node = Html::using('node');
@@ -137,7 +137,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         ], $column['props']), [$text($column['name'])]);
     }
 
-    protected static function makeHead($columns)
+    protected static function __makeHead($columns)
     {
         $map = Functor::using('fmap');
         $node = Html::using('node');
@@ -154,7 +154,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         ]);
     }
 
-    protected static function makeBodyCell($datum, $column)
+    protected static function __makeBodyCell($datum, $column)
     {
         $text = Html::using('text');
         $node = Html::using('node');
@@ -166,7 +166,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         ], $column['props']), [$text($column['accessor']($datum))]);
     }
 
-    protected static function makeBodyRow($columns, $datum)
+    protected static function __makeBodyRow($columns, $datum)
     {
         $map = Functor::using('fmap');
         $node = Html::using('node');
@@ -180,7 +180,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         ], $map($makeBodyCell($datum), $columns));
     }
 
-    protected static function makeStyle()
+    protected static function __makeStyle()
     {
         ob_start(); ?>
 
@@ -241,7 +241,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         <?php return ob_get_clean();
     }
 
-    protected static function makeBody($columns, $data)
+    protected static function __makeBody($columns, $data)
     {
         $map = Functor::using('fmap');
         $node = Html::using('node');
