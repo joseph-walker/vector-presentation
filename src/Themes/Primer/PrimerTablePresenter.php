@@ -27,10 +27,10 @@ class PrimerTablePresenter extends Module implements PresenterInterface
     public static function __orderByHeader($label, $name, $query, $up = 'up', $down = 'down')
     {
         if (isset($query[$name]) && $query[$name] === 'asc') {
-            $direction = $down;
+            $direction = $up;
             $link = '';
         } elseif (isset($query[$name]) && $query[$name] === 'desc') {
-            $direction = $up;
+            $direction = $down;
             $link = 'asc';
         } else {
             $direction = '';
