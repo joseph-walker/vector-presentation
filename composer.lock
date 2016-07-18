@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "vector/core",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joseph-walker/vector.git",
-                "reference": "26abf80f72fe690c1451e2993e102e0d7c694624"
+                "reference": "3de14913c09969217085e9355ba2306e963f0677"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joseph-walker/vector/zipball/26abf80f72fe690c1451e2993e102e0d7c694624",
-                "reference": "26abf80f72fe690c1451e2993e102e0d7c694624",
+                "url": "https://api.github.com/repos/joseph-walker/vector/zipball/3de14913c09969217085e9355ba2306e963f0677",
+                "reference": "3de14913c09969217085e9355ba2306e963f0677",
                 "shasum": ""
             },
             "require-dev": {
@@ -52,7 +52,7 @@
                 "monad",
                 "utility"
             ],
-            "time": "2016-07-13 17:08:15"
+            "time": "2016-07-14 16:30:07"
         }
     ],
     "packages-dev": [

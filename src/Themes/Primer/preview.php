@@ -7,6 +7,16 @@ use Vector\TableBuilder\Presenter\CsvPresenter;
 use Vector\Themes\Primer\PrimerPagination;
 use Vector\Themes\Primer\PrimerTablePresenter;
 
+$orderByName = function (\Illuminate\Database\Eloquent\Builder $query, $queryString) {
+    if (isset($queryString['name']) && in_array($queryString['name'], ['desc', 'asc'])) {
+        $query->orderBy('name', $queryString['name']);
+    }
+
+    return $query;
+};
+$q = User::whereNotNull('id');
+$query = $orderByName($q, $_GET);
+
 if (isset($_GET['download'])) {
     $builder = new Builder(new CsvPresenter());
 
@@ -14,19 +24,23 @@ if (isset($_GET['download'])) {
         ->column('Name', [], function($a) { return $a['name']; })
         ->column('Email', [], function($b) { return $b['email']; });
 
-    echo $builder->build(User::orderBy('id')->get()->toArray());
+    echo $builder->build($query->toArray());
     exit;
 }
 
 /** @var \Illuminate\Pagination\LengthAwarePaginator $paginator */
-$paginator = User::orderBy('id')->paginate(isset($_GET['perPage']) ? $_GET['perPage'] : 10);
+$paginator = $query->paginate(isset($_GET['perPage']) ? $_GET['perPage'] : 10);
 
-$builder = new Builder(new CsvPresenter());
-
-$button = "<button class='btn btn-primary'>asdf asd f</button>";
+$builder = new Builder(new PrimerTablePresenter());
 
 $builder
-    ->column('Name', [], function($a) use ($button) { return $button; })
+    ->column(
+        PrimerTablePresenter::orderByHeader('Name', 'name', $_GET, 'up', 'down'),
+        [],
+        function ($a) {
+            return $a['name'];
+        }
+    )
     ->column('Email', [], function($b) { return $b['email']; });
 
 ?>
@@ -39,7 +53,8 @@ $builder
     <?= $builder->build($paginator->getCollection()->toArray(), [
         'paginator' => $paginator,
         'perPage' => true,
-        'download' => true
+        'download' => true,
+        'sortable' => true
     ]) ?>
 
     <?= PrimerPagination::render($paginator->appends($_GET)) ?>

@@ -7,8 +7,11 @@ use Vector\Control\Functor;
 use Vector\Core\Module;
 use Vector\Markup\Html;
 use Vector\TableBuilder\Presenter\PresenterInterface;
-use Vector\Util;
 
+/**
+ * @method static orderByHeader($label, $name, $query, $up = 'up', $down = 'down') Create order by links and labels for column headers
+ * @method static keys($arr) Return the keys of a list.
+ */
 class PrimerTablePresenter extends Module implements PresenterInterface
 {
     private $tableProps;
@@ -19,6 +22,28 @@ class PrimerTablePresenter extends Module implements PresenterInterface
             'class' => 'vector_primer_table',
             'style' => 'display: flex;flex-direction: column;'
         ], $tableProps);
+    }
+
+    public static function __orderByHeader($label, $name, $query, $up = 'up', $down = 'down')
+    {
+        if (isset($query[$name]) && $query[$name] === 'asc') {
+            $direction = $down;
+            $link = '';
+        } elseif (isset($query[$name]) && $query[$name] === 'desc') {
+            $direction = $up;
+            $link = 'asc';
+        } else {
+            $direction = '';
+            $link = 'desc';
+        }
+
+        $queryString = http_build_query(array_merge($_GET, [
+            $name => $link
+        ]));
+
+        ob_start(); ?>
+        <a href="<?= $_SERVER['SCRIPT_NAME'] ?>?<?= $queryString ?>"><?= $label . ' ' . $direction ?></a>
+        <?php return ob_get_clean();
     }
 
     public function build($columnDefinitions, $data, $extra = null)
@@ -108,7 +133,9 @@ class PrimerTablePresenter extends Module implements PresenterInterface
 
         return $a([
             'download' => 'table.csv',
-            'href' => Util::withQuery(['download' => 'csv']),
+            'href' => parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
+                . '?'
+                . http_build_query(array_merge($_GET, ['download' => 'csv'])),
             'class' => 'btn btn-default'
         ], [$text('Download CSV')]);
     }
