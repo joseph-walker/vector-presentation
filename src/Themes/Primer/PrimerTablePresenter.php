@@ -5,6 +5,7 @@ namespace Vector\Themes\Primer;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Vector\Control\Functor;
 use Vector\Core\Module;
+use Vector\Lib\ArrayList;
 use Vector\Markup\Html;
 use Vector\TableBuilder\Presenter\PresenterInterface;
 
@@ -37,7 +38,11 @@ class PrimerTablePresenter extends Module implements PresenterInterface
             $link = 'desc';
         }
 
-        $queryString = http_build_query(array_merge($_GET, [
+        $get_without_sorts = ArrayList::filter(function ($get) {
+            return !in_array($get, ['asc', 'desc']);
+        }, $query);
+
+        $queryString = http_build_query(array_merge($get_without_sorts, [
             $name => $link
         ]));
 
