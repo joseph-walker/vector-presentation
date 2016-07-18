@@ -42,7 +42,7 @@ class PrimerTablePresenter extends Module implements PresenterInterface
         ]));
 
         ob_start(); ?>
-        <a href="<?= $_SERVER['SCRIPT_NAME'] ?>?<?= $queryString ?>"><?= $label . ' ' . $direction ?></a>
+        <a href="<?= parse_url($_SERVER["REQUEST_URI"])['path'] ?>?<?= $queryString ?>"><?= $label . ' ' . $direction ?></a>
         <?php return ob_get_clean();
     }
 
