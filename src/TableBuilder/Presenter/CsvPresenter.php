@@ -11,7 +11,6 @@ class CsvPresenter implements PresenterInterface
 {
     public function build($columnDefinitions, $data, $extra = null)
     {
-//        $view      = Lens::using('view');
         $indexLens = Lens::using('indexLens');
         $compose   = Lambda::using('compose');
         $fmap      = Functor::using('fmap');

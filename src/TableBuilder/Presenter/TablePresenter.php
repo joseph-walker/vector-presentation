@@ -25,29 +25,29 @@ class TablePresenter extends Module implements PresenterInterface
         ]);
     }
 
-    protected static function _makeHeadCell($column)
+    protected static function __makeHeadCell($column)
     {
         return Html::node('th', $column['props'], [Html::text($column['name'])]);
     }
 
-    protected static function _makeHead($columns)
+    protected static function __makeHead($columns)
     {
         return Html::node('thead', [], [
             Html::node('tr', [], Functor::fmap(self::makeHeadCell(), $columns))
         ]);
     }
 
-    protected static function _makeBodyCell($datum, $column)
+    protected static function __makeBodyCell($datum, $column)
     {
         return Html::node('td', $column['props'], [Html::text($column['accessor']($datum))]);
     }
 
-    protected static function _makeBodyRow($columns, $datum)
+    protected static function __makeBodyRow($columns, $datum)
     {
         return Html::node('tr', [], Functor::fmap(self::makeBodyCell($datum), $columns));
     }
 
-    protected static function _makeBody($columns, $data)
+    protected static function __makeBody($columns, $data)
     {
         return Html::node('tbody', [], Functor::fmap(self::makeBodyRow($columns), $data));
     }
