@@ -17,10 +17,6 @@
     "require": {
         "vector/core": "^3.0"
     },
-    "require-dev": {
-      "illuminate/database": "~5.2.0",
-      "illuminate/pagination": "~5.2.0"
-    },
     "autoload": {
         "psr-4": {
             "Vector\\": "./src"
